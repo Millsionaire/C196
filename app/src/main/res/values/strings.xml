@@ -150,4 +150,9 @@
     <string name="share">Share</string>
     <string name="must_save_assessment_text">Assessment type can be updated once assessment is saved.</string>
     <string name="set_alarm_button">Set alarm for current start/end dates</string>
+    <string name="enter_new_mentor">Enter New Mentor</string>
+    <string name="enter_new_mentor_name">Enter new mentor name</string>
+    <string name="enter_new_mentor_email">Enter new mentor email</string>
+    <string name="enter_new_mentor_phone_number">Enter new mentor phone number</string>
+    <string name="save_new_mentor">Save new mentor</string>
 </resources>

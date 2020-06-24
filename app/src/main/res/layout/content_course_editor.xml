@@ -85,7 +85,8 @@
                 android:text="@string/set_alarm_button"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/end_date_text" />
+                app:layout_constraintTop_toBottomOf="@+id/end_date_text"
+                tools:ignore="TextViewEdits" />
 
         <TextView
                 android:id="@+id/notes_label"
@@ -102,7 +103,6 @@
                 android:layout_width="82dp"
                 android:layout_height="38dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/share"
                 app:layout_constraintStart_toEndOf="@+id/notes_label"
@@ -158,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:hint="@string/select_mentor_from_list"
-                android:inputType="textMultiLine|textCapSentences"
+                android:inputType="textFilter|textMultiLine|textCapSentences"
                 app:layout_constraintTop_toBottomOf="@+id/mentor_information"
                 tools:ignore="TextFields" />
 
@@ -167,7 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:inputType="textMultiLine"
+                android:inputType="textFilter|textMultiLine|textCapSentences"
                 app:layout_constraintTop_toBottomOf="@+id/mentor_name_text"
                 tools:ignore="TextFields" />
 
@@ -176,9 +176,61 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints=""
-                android:inputType="textMultiLine"
+                android:inputType="textFilter|textMultiLine"
                 app:layout_constraintTop_toBottomOf="@+id/mentor_phone_text"
                 tools:ignore="TextFields" />
+
+        <TextView
+                android:id="@+id/enter_new_mentor_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin"
+                android:text="@string/enter_new_mentor"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mentor_email_text" />
+
+        <EditText
+                android:id="@+id/new_mentor_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_new_mentor_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/enter_new_mentor_label"
+                android:autofillHints=""
+                android:inputType="text" />
+
+        <EditText
+                android:id="@+id/new_mentor_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_new_mentor_email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_mentor_name"
+                android:autofillHints=""
+                android:inputType="textEmailAddress" />
+
+        <EditText
+                android:id="@+id/new_mentor_phone"
+                android:layout_width="match_parent"
+                android:hint="@string/enter_new_mentor_phone_number"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_mentor_email"
+                android:autofillHints=""
+                android:inputType="phone" />
+
+        <Button
+                android:id="@+id/save_mentor_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFCC5B"
+                android:text="@string/save_new_mentor"
+                android:inputType="textCapSentences"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_mentor_phone"
+                tools:ignore="TextViewEdits" />
 
         <TextView
                 android:id="@+id/status_label"
@@ -188,7 +240,7 @@
                 android:text="@string/status"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mentor_email_text" />
+                app:layout_constraintTop_toBottomOf="@+id/save_mentor_button" />
 
         <Spinner
                 android:id="@+id/status_spinner"

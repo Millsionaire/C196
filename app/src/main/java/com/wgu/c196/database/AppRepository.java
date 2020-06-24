@@ -38,6 +38,10 @@ public class AppRepository {
         return mDb.mentorDao().getAll();
     }
 
+    public void refreshMentors() {
+        mMentors = this.getAllMentors();
+    }
+
     public void addSampleData() {
         executor.execute(new Runnable() {
             @Override
@@ -91,12 +95,6 @@ public class AppRepository {
             @Override
             public void run() {
                 mDb.courseDao().deleteAll();
-            }
-        });
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.mentorDao().deleteAll();
             }
         });
         executor.execute(new Runnable() {
@@ -214,5 +212,9 @@ public class AppRepository {
                 }
             }
         });
+    }
+
+    public void insertMentor(MentorEntity newMentor) {
+        mDb.mentorDao().insertMentor(newMentor);
     }
 }

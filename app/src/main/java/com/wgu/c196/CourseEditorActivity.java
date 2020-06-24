@@ -18,10 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.*;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -97,6 +94,20 @@ public class CourseEditorActivity extends AppCompatActivity {
     @BindView(R.id.shareNotesButton)
     Button mShareNotesButton;
 
+    @BindView(R.id.new_mentor_name)
+    EditText mNewMentorName;
+
+    @BindView(R.id.new_mentor_email)
+    EditText mNewMentorEmail;
+
+    @BindView(R.id.new_mentor_phone)
+    EditText mNewMentorPhone;
+
+    @BindView(R.id.save_mentor_button)
+    Button mSaveMentorButton;
+
+
+
     @OnClick(R.id.fab)
     public void fabClickHandler() {
         Intent intent = new Intent(this, AssessmentEditorActivity.class);
@@ -142,6 +153,31 @@ public class CourseEditorActivity extends AppCompatActivity {
             }
             AlertDialogService.showAlert("Alarm set for " + mCourseText.getText().toString(), mCourseText.getContext());
         }
+    }
+
+    @OnClick(R.id.save_mentor_button)
+    public void saveMentor() {
+        if (mNewMentorName.getText().toString().equals("") || mNewMentorEmail.getText().toString().equals("") || mNewMentorPhone.getText().toString().equals("")) {
+            AlertDialogService.showAlert("All mentor information must be entered before saving.", mNewMentorName.getContext());
+            return;
+        }
+
+        MentorEntity newMentor = new MentorEntity(
+                mNewMentorName.getText().toString(),
+                mNewMentorPhone.getText().toString(),
+                mNewMentorEmail.getText().toString()
+        );
+
+        try {
+            courseEditorViewModel.saveMentor(newMentor);
+            mNewMentorName.setText("");
+            mNewMentorPhone.setText("");
+            mNewMentorEmail.setText("");
+            AlertDialogService.showAlert("Mentor successfully saved. You can now select the mentor in the dropdown list", mNewMentorName.getContext());
+        } catch (Exception e) {
+            AlertDialogService.showAlert("Could not save mentor: " + e.getMessage(), mNewMentorName.getContext());
+        }
+
     }
 
     private int mTermId;
@@ -202,6 +238,7 @@ public class CourseEditorActivity extends AppCompatActivity {
         courseEditorViewModel.mMentors.observe(this, new Observer<List<MentorEntity>>() {
             @Override
             public void onChanged(@Nullable List<MentorEntity> mentorEntityList) {
+                mentors.clear();
                 for (MentorEntity mentor: mentorEntityList) {
                     mentors.add(mentor.toString());
                 }
@@ -267,6 +304,10 @@ public class CourseEditorActivity extends AppCompatActivity {
         mAssessmentsLabel.setVisibility(showElements);
         mRecyclerView.setVisibility(showElements);
         mFab.setVisibility(showElements);
+        mNewMentorName.setVisibility(showElements);
+        mNewMentorEmail.setVisibility(showElements);
+        mNewMentorPhone.setVisibility(showElements);
+        mSaveMentorButton.setVisibility(showElements);
     }
 
     private void initRecyclerView() {

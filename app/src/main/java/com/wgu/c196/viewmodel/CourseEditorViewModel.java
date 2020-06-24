@@ -104,4 +104,16 @@ public class CourseEditorViewModel extends AndroidViewModel {
         mRepository.insertCourse(courseWithAssessments.course);
         mLiveCourse.postValue(courseWithAssessments);
     }
+
+    public void saveMentor(MentorEntity newMentor) {
+        final MentorEntity finalNewMentor = newMentor;
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                mRepository.insertMentor(finalNewMentor);
+                mRepository.refreshMentors();
+            }
+        });
+
+    }
 }
